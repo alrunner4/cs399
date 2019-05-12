@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>0 Intro</title>
+<meta name="description" content="Introduction to Functional Programming	Alex Carter">
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+
+<link rel="canonical" href="http://localhost:4000/slides/0-intro.html">
+
+  <link type="text/css" rel="stylesheet" href="/css/main.css"/>
+  <link type="text/css" rel="stylesheet" href="/lightslider/dist/css/lightslider.css"/>
+  <script src="/lightslider/dist/js/lightslider.js"></script>
+  <style>
+    body {
+      margin: 0;
+      overflow-x: hidden;
+    }
+    img {
+      min-width: 100%
+    }
+  </style>
+</head>
+<body>
+<ul>
+<li><h1>Introduction to Functional Programming</h1>
+	<h2>Alex Carter</h2>
+</li>
+
+<li><h1>What is a function?</h1></li>
+
+<li><h1>What is <i>not</i> a function?</h1>
+	
+<figure class="highlight"><pre><code class="language-cpp" data-lang="cpp"><span></span><span class="cp">#include</span> <span class="cpf">&lt;iostream&gt;</span><span class="cp"></span>
+
+<span class="k">class</span> <span class="nc">World</span> <span class="p">{</span>
+<span class="k">public</span><span class="o">:</span>
+  <span class="kt">void</span> <span class="n">fireMissiles</span><span class="p">(){</span> <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;boom&quot;</span><span class="p">;</span> <span class="p">}</span>
+<span class="p">};</span>
+
+<span class="k">class</span> <span class="nc">Safe</span> <span class="p">{</span>
+  <span class="n">World</span><span class="o">*</span> <span class="n">world</span><span class="p">;</span>
+<span class="k">public</span><span class="o">:</span>
+  <span class="n">Safe</span><span class="p">(</span><span class="n">World</span><span class="o">*</span> <span class="n">w</span><span class="p">){</span> <span class="n">world</span> <span class="o">=</span> <span class="n">w</span><span class="p">;</span> <span class="p">}</span>
+  <span class="kt">int</span> <span class="n">totallySafeGetter</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span> <span class="n">world</span><span class="o">-&gt;</span><span class="n">fireMissiles</span><span class="p">();</span> <span class="k">return</span> <span class="mi">42</span><span class="p">;</span> <span class="p">}</span>
+<span class="p">};</span></code></pre></figure>
+
+</li>
+
+<li><h1>What is <i>not</i> a function?</h1>
+	
+<figure class="highlight"><pre><code class="language-cpp" data-lang="cpp"><span></span><span class="cp">#include</span> <span class="cpf">&lt;iostream&gt;</span><span class="cp"></span>
+
+<span class="k">class</span> <span class="nc">Safe</span><span class="p">;</span>
+
+<span class="k">class</span> <span class="nc">World</span> <span class="p">{</span>
+    <span class="n">Safe</span><span class="o">*</span> <span class="n">lastSafe</span><span class="p">;</span>
+<span class="k">public</span><span class="o">:</span>
+    <span class="kt">void</span> <span class="n">fireMissiles</span><span class="p">();</span>
+    <span class="n">Safe</span><span class="o">*</span> <span class="nf">makeSafe</span><span class="p">();</span>
+<span class="p">};</span>
+
+<span class="k">class</span> <span class="nc">Safe</span> <span class="p">{</span>
+    <span class="n">World</span><span class="o">*</span> <span class="n">world</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">secret</span><span class="p">;</span>
+<span class="k">public</span><span class="o">:</span>
+    <span class="n">Safe</span><span class="p">(</span><span class="n">World</span><span class="o">*</span> <span class="n">w</span><span class="p">){</span> <span class="n">world</span> <span class="o">=</span> <span class="n">w</span><span class="p">;</span> <span class="n">secret</span> <span class="o">=</span> <span class="mi">42</span><span class="p">;</span> <span class="p">}</span>
+    <span class="kt">int</span> <span class="n">totallySafeGetter</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span> <span class="n">world</span><span class="o">-&gt;</span><span class="n">fireMissiles</span><span class="p">();</span> <span class="k">return</span> <span class="n">secret</span><span class="p">;</span> <span class="p">}</span>
+    <span class="kt">void</span> <span class="n">setSecret</span><span class="p">(</span><span class="kt">int</span> <span class="n">x</span><span class="p">){</span> <span class="n">secret</span> <span class="o">=</span> <span class="n">x</span><span class="p">;</span> <span class="p">}</span>
+<span class="p">};</span>
+
+<span class="kt">void</span> <span class="n">World</span><span class="o">::</span><span class="n">fireMissiles</span><span class="p">(){</span> <span class="n">lastSafe</span><span class="o">-&gt;</span><span class="n">setSecret</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span> <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;boom&quot;</span><span class="p">;</span> <span class="p">}</span>
+
+<span class="n">Safe</span><span class="o">*</span> <span class="n">World</span><span class="o">::</span><span class="n">makeSafe</span><span class="p">(){</span> <span class="k">return</span><span class="p">(</span> <span class="n">lastSafe</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Safe</span><span class="p">(</span><span class="k">this</span><span class="p">)</span> <span class="p">);</span> <span class="p">}</span></code></pre></figure>
+
+</li>
+
+<li><h1>What is a function?</h1>
+	<ol>
+		<li>pure</li>
+		<li><a href="https://en.wikipedia.org/wiki/Referential_transparency">referentially transparent</a></li>
+	</ol>
+</li>
+
+<li><h1>Referential Transparency</h1>
+	<table><tr>
+		<td>
+<figure class="highlight"><pre><code class="language-cpp" data-lang="cpp"><span></span><span class="cp">#include</span> <span class="cpf">&lt;utility&gt; /* pair, make_pair */</span><span class="cp"></span>
+
+<span class="k">class</span> <span class="nc">Counter</span> <span class="p">{</span>
+	<span class="kt">int</span> <span class="n">count</span><span class="p">;</span>
+<span class="k">public</span><span class="o">:</span>
+	<span class="n">Counter</span><span class="p">(){</span> <span class="n">count</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="p">}</span>
+	<span class="kt">int</span> <span class="n">hit</span><span class="p">(){</span> <span class="k">return</span> <span class="o">++</span><span class="n">count</span><span class="p">;</span> <span class="p">}</span>
+<span class="p">};</span>
+
+<span class="n">std</span><span class="o">::</span><span class="n">pair</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">duplicated</span><span class="p">(</span> <span class="n">Counter</span> <span class="n">c</span> <span class="p">){</span>
+	<span class="k">return</span> <span class="n">std</span><span class="o">::</span><span class="n">make_pair</span><span class="p">(</span> <span class="n">c</span><span class="p">.</span><span class="n">hit</span><span class="p">(),</span> <span class="n">c</span><span class="p">.</span><span class="n">hit</span><span class="p">()</span> <span class="p">);</span>
+<span class="p">}</span>
+<span class="n">std</span><span class="o">::</span><span class="n">pair</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">deduplicated</span><span class="p">(</span> <span class="n">Counter</span> <span class="n">c</span> <span class="p">){</span>
+	<span class="kt">int</span> <span class="n">hits</span> <span class="o">=</span> <span class="n">c</span><span class="p">.</span><span class="n">hit</span><span class="p">();</span>
+	<span class="k">return</span> <span class="n">std</span><span class="o">::</span><span class="n">make_pair</span><span class="p">(</span> <span class="n">hits</span><span class="p">,</span> <span class="n">hits</span> <span class="p">);</span>
+<span class="p">}</span></code></pre></figure>
+</td>
+		<td>
+<figure class="highlight"><pre><code class="language-cpp" data-lang="cpp"><span></span><span class="cp">#include</span> <span class="cpf">&lt;utility&gt; /* pair, makePair */</span><span class="cp"></span>
+
+<span class="k">typedef</span> <span class="n">Counter</span> <span class="kt">int</span><span class="p">;</span>
+
+<span class="kt">int</span> <span class="nf">hit</span><span class="p">(</span> <span class="n">Counter</span> <span class="n">c</span> <span class="p">)</span> <span class="p">{</span> <span class="k">return</span> <span class="n">c</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span> <span class="p">}</span>
+
+<span class="n">std</span><span class="o">::</span><span class="n">pair</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">duplicated</span><span class="p">(</span> <span class="n">Counter</span> <span class="n">c</span> <span class="p">)</span> <span class="p">{</span>
+	<span class="k">return</span> <span class="n">std</span><span class="o">::</span><span class="n">make_pair</span><span class="p">(</span> <span class="n">hit</span><span class="p">(</span><span class="n">c</span><span class="p">),</span> <span class="n">hit</span><span class="p">(</span><span class="n">c</span><span class="p">)</span> <span class="p">);</span>
+<span class="p">}</span>
+
+<span class="n">std</span><span class="o">::</span><span class="n">pair</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">deduplicated</span><span class="p">(</span> <span class="n">Counter</span> <span class="n">c</span> <span class="p">)</span> <span class="p">{</span>
+	<span class="kt">int</span> <span class="n">hits</span> <span class="o">=</span> <span class="n">hit</span><span class="p">(</span><span class="n">c</span><span class="p">);</span>
+	<span class="k">return</span> <span class="n">std</span><span class="o">::</span><span class="n">make_pair</span><span class="p">(</span> <span class="n">hits</span><span class="p">,</span> <span class="n">hits</span> <span class="p">);</span>
+<span class="p">}</span></code></pre></figure>
+</td>
+	</tr></table>
+</li>
+
+<li><img src="https://www.idris-lang.org/logo/logo.png" style="height: 64pt; min-width: 0; max-width: 90%" />
+	<h2><ol>
+		<li><a href="https://idris-lang.org">https://idris-lang.org</a></li>
+		<li><a href="http://docs.idris-lang.org">http://docs.idris-lang.org</a></li>
+		<li><a href="https://github.com/idris-lang/Idris-dev/wiki/Windows-Binaries">Windows Binary</a></li>
+	</ol></h2>
+</li>
+
+<li><h1>Introduction to Idris Syntax</h1>
+	<h2>Patterns</h2>
+	
+<figure class="highlight"><pre><code class="language-idr" data-lang="idr"><span></span><span class="kr">module</span> <span class="nn">Greet</span>
+<span class="ow">%</span> access <span class="kr">public</span> export
+
+<span class="nf">greet</span> <span class="ow">:</span> <span class="kt">String</span> <span class="ow">-&gt;</span> <span class="kt">String</span>
+greet <span class="s">&quot;Alex&quot;</span> <span class="ow">=</span> <span class="s">&quot;How&#39;s that CS399 going?&quot;</span>
+greet person <span class="ow">=</span> <span class="s">&quot;Hi, &quot;</span> <span class="ow">++</span> person <span class="ow">++</span> <span class="s">&quot;!&quot;</span>
+
+<span class="c1">||| What happens if the case for `_ &quot;Alex&quot;` comes last?</span>
+<span class="nf">context_is_everything</span> <span class="ow">:</span> <span class="kt">Int</span> <span class="ow">-&gt;</span> <span class="kt">String</span> <span class="ow">-&gt;</span> <span class="kt">String</span>
+context_is_everything <span class="mi">399</span> <span class="s">&quot;Alex&quot;</span> <span class="ow">=</span> <span class="s">&quot;How&#39;s that CS399 going?&quot;</span>
+context_is_everything <span class="kr">_</span>   <span class="s">&quot;Alex&quot;</span> <span class="ow">=</span> <span class="s">&quot;Back at DigiPen, eh?&quot;</span>
+context_is_everything <span class="mi">399</span>  name  <span class="ow">=</span> <span class="s">&quot;Confused yet, &quot;</span> <span class="ow">++</span> name <span class="ow">++</span> <span class="s">&quot;?&quot;</span>
+context_is_everything num  name  <span class="ow">=</span> <span class="s">&quot;Looks like &quot;</span> <span class="ow">++</span> name <span class="ow">++</span>
+                                   <span class="s">&quot; is taking &quot;</span> <span class="ow">++</span> show num <span class="ow">++</span>
+                                   <span class="s">&quot; this semester.&quot;</span></code></pre></figure>
+
+	<p>Patterns are our primary means of defining functions!</p>
+</li>
+
+<li><h1>Introduction to Idris Syntax</h1>
+	<h2>Primitive Types</h2>
+	
+<figure class="highlight"><pre><code class="language-idr" data-lang="idr"><span></span><span class="kr">module</span> <span class="nn">IntroPrims</span>
+
+<span class="kr">name</span> <span class="ow">:</span> <span class="kt">String</span>
+<span class="kr">name</span> <span class="ow">=</span> <span class="s">&quot;Alex Carter&quot;</span>
+
+<span class="nf">letter</span> <span class="ow">:</span> <span class="kt">Char</span>
+letter <span class="ow">=</span> <span class="sc">&#39;Z&#39;</span>
+
+<span class="nf">big_number</span> <span class="ow">:</span> <span class="kt">Integer</span>
+big_number <span class="ow">=</span> <span class="mi">31</span>
+
+<span class="nf">regular_number</span> <span class="ow">:</span> <span class="kt">Int</span>
+regular_number <span class="ow">=</span> fromInteger big_number
+
+<span class="nf">specific_number</span> <span class="ow">:</span> <span class="kt">Double</span>
+specific_number <span class="ow">=</span> <span class="mf">42.001</span></code></pre></figure>
+
+</li>
+
+<li><h1>Introduction to Idris Syntax</h1>
+	<h2>Data Types</h2>
+	
+<figure class="highlight"><pre><code class="language-idr" data-lang="idr"><span></span><span class="kr">module</span> <span class="nn">IntroData</span>
+
+<span class="nf">pair</span> <span class="ow">:</span> <span class="ow">(</span> <span class="kt">String</span> , <span class="kt">Double</span> <span class="ow">)</span>
+pair <span class="ow">=</span> <span class="ow">(</span> <span class="s">&quot;grade&quot;</span> , <span class="mf">0.99</span> <span class="ow">)</span>
+
+<span class="nf">tuple</span> <span class="ow">:</span> <span class="ow">(</span> <span class="kt">String</span>, <span class="kt">String</span>, <span class="kt">Bool</span>, <span class="kt">String</span> <span class="ow">)</span>
+tuple <span class="ow">=</span> <span class="ow">(</span> <span class="s">&quot;just&quot;</span>, <span class="s">&quot;keeps&quot;</span>, <span class="kt">True</span>, <span class="s">&quot;going&quot;</span> <span class="ow">)</span>
+
+<span class="nf">list</span> <span class="ow">:</span> <span class="kt">List</span> <span class="kt">Int</span>
+list <span class="ow">=</span> <span class="ow">[</span> <span class="mi">399</span>, <span class="mi">5</span>, <span class="mi">6</span>, <span class="mi">2019</span> <span class="ow">]</span>
+
+<span class="c1">||| `Product` is a `Type`. `P` is a data constructor that produces a value in</span>
+<span class="c1">||| `Product` when given two `Int`s and a `String`.</span>
+<span class="kr">data</span> <span class="kt">Product</span> <span class="ow">=</span> <span class="kt">P</span> <span class="kt">Int</span> <span class="kt">Int</span> <span class="kt">String</span>
+
+<span class="c1">||| This type has three possible values, much like an enumeration.</span>
+<span class="kr">data</span> <span class="kt">Sum</span> <span class="ow">=</span> <span class="kt">First</span> <span class="ow">|</span> <span class="kt">Second</span> <span class="ow">|</span> <span class="kt">Third</span>
+
+<span class="c1">||| How many values inhabit this type?</span>
+<span class="kr">data</span> <span class="kt">SumOfProducts</span> <span class="ow">=</span> <span class="kt">Left</span> <span class="kt">Bool</span> <span class="kt">String</span> <span class="ow">|</span> <span class="kt">Right</span> <span class="kt">Int</span></code></pre></figure>
+
+</li>
+
+<li><h1>Introduction to Idris Syntax</h1>
+	<h2>Type Parametric Data</h2>
+	
+<figure class="highlight"><pre><code class="language-idr" data-lang="idr"><span></span><span class="kr">module</span> <span class="nn">IntroDataParam</span>
+
+<span class="kr">data</span> <span class="kt">Maybe</span> a <span class="ow">=</span> <span class="kt">Just</span> a <span class="ow">|</span> <span class="kt">Nothing</span>
+
+<span class="kr">data</span> <span class="kt">Either</span> a b <span class="ow">=</span> <span class="kt">Left</span> a <span class="ow">|</span> <span class="kt">Right</span> b
+
+<span class="kr">data</span> <span class="kt">LinkedList</span> a <span class="ow">=</span> <span class="kt">Empty</span> <span class="ow">|</span> <span class="kt">Prepend</span> a <span class="ow">(</span> <span class="kt">LinkedList</span> a <span class="ow">)</span>
+
+<span class="nf">Nil</span> <span class="ow">:</span> <span class="kt">LinkedList</span> a
+<span class="kt">Nil</span> <span class="ow">=</span> <span class="kt">Empty</span>
+
+<span class="ow">(::)</span> <span class="ow">:</span> a <span class="ow">-&gt;</span> <span class="kt">LinkedList</span> a <span class="ow">-&gt;</span> <span class="kt">LinkedList</span> a
+<span class="ow">(::)</span> <span class="ow">=</span> <span class="kt">Prepend</span>
+
+<span class="nf">list</span> <span class="ow">:</span> <span class="kt">LinkedList</span> <span class="kt">Int</span>
+list <span class="ow">=</span> <span class="mi">399</span> <span class="ow">::</span> <span class="mi">2019</span> <span class="ow">::</span> <span class="mi">5</span> <span class="ow">::</span> <span class="mi">6</span> <span class="ow">::</span> <span class="kt">Nil</span></code></pre></figure>
+
+</li>
+
+<li><h1>Introduction to Idris Syntax</h1>
+	<h2>Encapsulation</h2>
+	<table><tr>
+		<td>
+<figure class="highlight"><pre><code class="language-idr" data-lang="idr"><span></span><span class="kr">module</span> <span class="nn">IntroEncapsulation</span>
+
+<span class="c1">||| &quot;export&quot;ing this data definition exposes the type `EvenNumbers`,</span>
+<span class="c1">||| but does not expose the data constructor `Evens`.</span>
+export
+<span class="kr">data</span> <span class="kt">EvenNumbers</span> <span class="ow">=</span> <span class="kt">Evens</span><span class="ow">(</span> <span class="kt">List</span> <span class="kt">Int</span> <span class="ow">)</span>
+
+<span class="c1">||| &quot;export&quot;ing this function exposes its name and type, but not its</span>
+<span class="c1">||| implementation. All elements of its type expression must also be exported.</span>
+<span class="c1">||| Note that this function cannot be qualified &quot;public export&quot; because it</span>
+<span class="c1">||| refers to the hidden `Evens`. This is an encapsulation technique we usually</span>
+<span class="c1">||| call &quot;smart construction.&quot;</span>
+export
+<span class="nf">filterEvens</span> <span class="ow">:</span> <span class="kt">List</span> <span class="kt">Int</span> <span class="ow">-&gt;</span> <span class="kt">EvenNumbers</span>
+filterEvens numbers <span class="ow">=</span> <span class="kt">Evens</span><span class="ow">(</span> filter<span class="ow">(\</span> n <span class="ow">=&gt;</span> modInt n <span class="mi">2</span> <span class="ow">==</span> <span class="mi">0</span> <span class="ow">)</span> numbers <span class="ow">)</span></code></pre></figure>
+</td>
+		<td>
+<figure class="highlight"><pre><code class="language-idr" data-lang="idr"><span></span><span class="kr">module</span> <span class="nn">IntroEncapsulationTest</span>
+<span class="kr">import</span> <span class="nn">IntroEncapsulation</span>
+
+<span class="c1">-- cheating_evens : EvenNumbers</span>
+<span class="c1">-- cheating_evens = Evens[ 3, 4, 5 ]</span>
+
+<span class="c1">-- cheating_evens fails to compile:</span>
+<span class="c1">-- &gt; When checking right hand side of cheating_evens with expected type</span>
+<span class="c1">-- &gt;        EvenNumbers</span>
+<span class="c1">-- &gt; No such variable Evens</span>
+
+<span class="nf">legal_evens</span> <span class="ow">:</span> <span class="kt">EvenNumbers</span>
+legal_evens <span class="ow">=</span> filterEvens<span class="ow">[</span> <span class="mi">3</span>, <span class="mi">4</span>, <span class="mi">5</span> <span class="ow">]</span></code></pre></figure>
+</td>
+	</tr></table>
+</li>
+
+<li><h1>Introduction to Idris Syntax</h1>
+	<h2>Partial Application</h2>
+	
+<figure class="highlight"><pre><code class="language-idr" data-lang="idr"><span></span><span class="kr">module</span> <span class="nn">PartialApplication</span>
+<span class="kr">import</span> <span class="nn">Greet</span>
+
+<span class="nf">step</span> <span class="ow">:</span> <span class="kt">Int</span> <span class="ow">-&gt;</span> <span class="kt">Int</span>
+step <span class="ow">=</span> <span class="ow">(+)</span> <span class="mi">3</span>
+
+<span class="nf">greet399</span> <span class="ow">:</span> <span class="kt">String</span> <span class="ow">-&gt;</span> <span class="kt">String</span>
+greet399 <span class="ow">=</span> context_is_everything <span class="mi">399</span>
+
+<span class="nf">greetYou</span> <span class="ow">:</span> <span class="kt">Int</span> <span class="ow">-&gt;</span> <span class="kt">String</span>
+greetYou <span class="ow">=</span> flip context_is_everything <span class="s">&quot;you&quot;</span>
+
+<span class="nf">pairwise</span> <span class="ow">:</span> <span class="ow">(</span> <span class="kt">Int</span>, <span class="kt">String</span> <span class="ow">)</span> <span class="ow">-&gt;</span> <span class="kt">String</span>
+pairwise <span class="ow">=</span> uncurry context_is_everything</code></pre></figure>
+
+</li>
+
+</ul>
+
+<script type="text/javascript"> 
+    $(document).ready(function() {
+      $("ul").lightSlider({
+        "adaptiveHeight": true,
+        "auto": false,
+        "controls": false,
+        "item": 1,
+        "keyPress": true,
+        "loop": true,
+        "mode": "slide",
+        "pager": false,
+        "speed": 400,
+        "vertical": false,
+      });
+    });
+    
+</script>
+</body>
+</html>
