@@ -20,7 +20,7 @@ interface GameOfLife( LifeWorld : Type -> Type ) where
     start : Area -> ( Position -> Bool ) -> LifeWorld ()
 
     ||| Produce a new LifeWorld state and return its liveness function.
-    evolve : LifeWorld () -> LifeWorld( Position -> Bool )
+    evolve : LifeWorld a -> LifeWorld( Position -> Bool )
 
     ||| Create a way to look up information about a cell within some
     ||| LifeWorld's context.
