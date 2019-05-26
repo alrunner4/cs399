@@ -50,3 +50,4 @@ drawBoard( Extents(x1,y1)(x2,y2) ) isLive = sequence_( map( putStrLn . rowString
 
     rowString : Int -> String
     rowString y = pack( map(\ x => if isLive(x,y) then 'X' else ' ' ) xs )
+
