@@ -24,7 +24,7 @@ interface GameOfLife( LifeWorld : Type -> Type ) where
 
     ||| Create a way to look up information about a cell within some
     ||| LifeWorld's context.
-    cell : Position -> LifeWorld () -> LifeWorld Cell
+    cell : Position -> LifeWorld a -> LifeWorld Cell
     
     ||| Check how many neighbors some cell has.
     countNeighbors : LifeWorld Cell -> LifeWorld Nat
