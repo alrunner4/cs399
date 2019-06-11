@@ -1,0 +1,10 @@
+[
+	{
+		"name": "jim",
+		"classes": [ "CS 399" ]
+	},
+	{
+		"name": "sue",
+		"classes": [ "CS 170", "GAM 100" ]
+	}
+]
