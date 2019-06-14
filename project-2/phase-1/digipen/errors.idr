@@ -17,6 +17,11 @@ public export
 data FailureMode = ParseFailure | DataFailure JsonFailureLocation
 
 public export
+Show FailureMode where
+	show ParseFailure = "ParseFailure"
+	show( DataFailure loc ) = "DataFailure: " ++ show loc
+
+public export
 Exceptional : Type -> Type
 Exceptional a = Either FailureMode a
 
