@@ -1,0 +1,14 @@
+CC = gcc
+IDRIS ?= idris
+CFLAGS = '-v' '-I${IDRIS_RTS}' '-I../../include' # `pkg-config --cflags glew`
+
+ifndef IDRIS_RTS
+$(error The IDRIS_RTS environment variable must be set (typically within IDRIS_HOME/lib/rts))
+endif
+
+gl_idris.o: gl_idris.c gl_idris.h
+
+clean: .PHONY
+	rm gl_idris.o
+
+.PHONY:
