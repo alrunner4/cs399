@@ -1,0 +1,18 @@
+CC = gcc
+IDRIS ?= idris
+CFLAGS = '-v' '-I${IDRIS_RTS}' '-I${PROJECT_ROOT}/include'
+
+ifndef IDRIS_RTS
+$(error The IDRIS_RTS environment variable must be set (typically within IDRIS_HOME/lib/rts))
+endif
+
+ifndef PROJECT_ROOT
+$(error The PROJECT_ROOT environment variable must be set to an absolute path (the project-3 directory))
+endif
+
+gl_idris.o: gl_idris.c gl_idris.h
+
+clean: .PHONY
+	rm gl_idris.o
+
+.PHONY:

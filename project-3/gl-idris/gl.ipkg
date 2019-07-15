@@ -1,0 +1,20 @@
+package gl
+
+sourcedir = src
+          
+modules = Graphics.Rendering.Config,
+          Graphics.Rendering.Gl,
+          Graphics.Rendering.Gl.Buffers,
+          Graphics.Rendering.Gl.Gl41, 
+          Graphics.Rendering.Gl.Types,
+          Graphics.Util.Color,
+          Graphics.Util.Mesh,
+          Graphics.Util.Time,
+          Graphics.Util.Transforms
+
+opts = "-p contrib"
+
+makefile = MakefileGl
+
+objs = gl_idris.o, gl_idris.h
+

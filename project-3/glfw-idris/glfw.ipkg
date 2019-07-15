@@ -1,0 +1,4 @@
+package glfw
+sourcedir = src
+modules = Graphics.Util.GlfwConfig,
+          Graphics.Util.Glfw
