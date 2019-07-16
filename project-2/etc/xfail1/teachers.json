@@ -1,0 +1,34 @@
+[
+	{
+		"name": "a.carter",
+		"classes": {
+			"CS" : {
+				"399": {
+					"days": [ "Monday", "Friday" ],
+					"role": "instructor"
+				},
+				"170": "yup"
+			}
+		}
+	},
+	{
+		"name": "mmead",
+		"classes": {
+			"CS": {
+				"170": {
+					"role": "instructor"
+				}
+			}
+		}
+	},
+	{
+		"name": "bob",
+		"classes": {
+			"CS": {
+				"170": {
+					"role": [ "assistant", "mmead" ]
+				}
+			}
+		}
+	}
+]

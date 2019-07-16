@@ -1,0 +1,7 @@
+{
+idris/leak/init_vm
+Memcheck:Leak
+fun:malloc
+fun:init_vm
+fun:main
+}

@@ -1,0 +1,11 @@
+---
+pass0: no error
+
+xfail1: teachers.json root -> list[0] -> object["classes"] -> object["CS"] -> object["170"] -> value
+xfail2: teachers.json root -> list[1] -> object["classes"] -> object["CS"] -> object["170"] -> value
+xfail3: students.json root -> list[0] -> object["name"] -> value
+xfail4: students.json root -> list[1] -> object["classes"] -> value
+xfail5: classes.json  root -> list[0] -> object["sections"] -> object["a"] -> list[1] -> list[2] -> value
+
+bonus1: students.json root -> list[1] -> object["classes"] -> list[1] -> value
+bonus2: teachers.json root -> list[2] -> object["classes"] -> object["CS"] -> object["170"] -> object["role"] -> list[1] -> value
