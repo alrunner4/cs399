@@ -14,8 +14,6 @@ import Control.Algebra
 %include C "GL/glew.h"
 %include C "gl_idris.h"
 %link    C "gl_idris.o"
-%link    C "glew32.lib"
-%dynamic   "glew32.dll"
 
 %access private
 

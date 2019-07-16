@@ -17,6 +17,12 @@ path/to/idris --install glfw.ipkg
 
 ```
 cd gl-idris
+```
+
+Edit src/Graphics/Rendering/Config.idr to reflect the absolute paths of the project include and lib
+directories on your system.
+
+```
 PROJECT_ROOT=/absolute/path/to/project-3 IDRIS_RTS=/absolute/path/to/idris/lib/rts path/to/idris --install gl.ipkg
 ```
 
