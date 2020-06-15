@@ -1,0 +1,15 @@
+name: statemachine
+version: 0.0.1
+synopsis: An assignment about state in Haskell, featuring GTK.
+maintainer: a.carter@digipen.edu
+build-type: Simple
+cabal-version: >=1.10
+
+executable statemachine
+  main-is: Main.hs
+  build-depends: base >=4.10
+               , gi-gtk
+			   , gi-gtk-hs
+			   , haskell-gi-base
+			   , text
+			   , transformers
