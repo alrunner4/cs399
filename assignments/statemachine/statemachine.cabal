@@ -9,7 +9,7 @@ executable statemachine
   main-is: Main.hs
   build-depends: base >=4.10
                , gi-gtk
-			   , gi-gtk-hs
-			   , haskell-gi-base
-			   , text
-			   , transformers
+               , gi-gtk-hs
+               , haskell-gi-base
+               , text
+               , transformers
