@@ -1,0 +1,21 @@
+name: concurrency
+version: 0.0.1
+synopsis: An assignment about Software Transactional Memory.
+maintainer: a.carter@digipen.edu
+build-type: Simple
+cabal-version: >=1.10
+
+executable concurrency
+  main-is       : Main.hs
+  other-modules : CS399.Game, CS399.Bots
+  build-depends : base >=4.10
+                , containers
+                , gi-glib
+                , gi-gtk
+                , haskell-gi-base
+                , random
+                , stm
+                , text
+                , time
+                , transformers
+  ghc-options   : -threaded
